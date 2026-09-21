@@ -13,3 +13,7 @@ Topik halaman saya: Tempat Top Up Diamond Game
 -Kolom tabel:Jenis Game, Jumlah diamond, Harga
 -Kolom form:Nama Game, Jumlah diamond, ID game
 -Gambar:topup.jpg
+
+## Catatan penggunaan AI
+
+Saya menggunakan AI untuk bertanya tentang gambar, selain itu saya menggunakannya untuk header dan form juga.
