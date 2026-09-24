@@ -1,8 +1,8 @@
 /* LAPIS 1 — primitif: nilai mentah, tidak menyebut peran apa pun */
 :root {
-  --blue-700: #b1d402;
+  --blue-700: #2926d0;
   --blue-500: #1e2585;
-  --gray-50: #827d7d;
+  --gray-50: #2e7dded1;
   --gray-900: #ffffff;
 
   --space-1: 0.25rem;
@@ -24,7 +24,7 @@
 :root {
   --color-bg: var(--gray-50);
   --color-fg: var(--gray-900);
-  --color-surface: #238fe1;
+  --color-surface: #e4ebf1;
   --color-border: #0d0d0d;
   --color-primary: var(--blue-700);
   --color-danger: #ff3d3d;

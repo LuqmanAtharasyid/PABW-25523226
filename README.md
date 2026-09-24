@@ -21,7 +21,7 @@ Saya menggunakan AI untuk bertanya tentang gambar, selain itu saya menggunakanny
 ## Pertemuan 4 - Design token halaman profil
 
 -Berkas gaya yang akan dibuat: token.css, base.css, layout.css, komponen.css, tema.css
--Warna utama: #B1D402(kuning), dipilih karena terang menyala
+-Warna utama: #, dipilih karena terang menyala
 
 ### token yang saya tetapkan
 

@@ -77,24 +77,41 @@
       <section id="topup-diamond">
         <h2>Top Up Diamond</h2>
 
-        <form action="/simpan" method="post">
-          <p>
-            <label for="nama">Nama</label>
-            <input type="text" id="nama" name="nama" required />
-          </p>
-
-          <p>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required />
-          </p>
-
-          <p>
-            <label for="jumlah">Jumlah Diamond</label>
-            <input type="number" id="jumlah" name="jumlah" min="1" required />
-          </p>
-
-          <button type="submit">Simpan</button>
-        </form>
+        <table>
+          <tbody>
+            <tr>
+              <th scope="row">Nama</th>
+              <th scope="row">
+                <input type="text" id="nama" name="nama" required />
+              </th>
+            </tr>
+            <tr>
+              <th scope="row">Email</th>
+              <th scope="row">
+                <input type="email" id="email" name="email" required />
+              </th>
+            </tr>
+            <tr>
+              <th scope="row">Jumlah Diamond</th>
+              <th scope="row">
+                <input
+                  type="number"
+                  id="jumlah"
+                  name="jumlah"
+                  min="1"
+                  required
+                />
+              </th>
+            </tr>
+            <tr>
+              <th>
+                <form action="/simpan" method="post">
+                  <button type="submit">Simpan</button>
+                </form>
+              </th>
+            </tr>
+          </tbody>
+        </table>
       </section>
 
       <section id="tentang-saya">
