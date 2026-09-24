@@ -1,34 +1,54 @@
-/* LAPIS 1 — primitif: nilai mentah, tidak menyebut peran apa pun */
-:root {
-  --blue-700: #2926d0;
-  --blue-500: #1e2585;
-  --gray-50: #2e7dded1;
-  --gray-900: #ffffff;
+/* =========================
+   PRIMITIVE TOKENS
+   ========================= */
 
+:root {
+  /* Warna dasar */
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-300: #cbd5e1;
+  --gray-700: #334155;
+  --gray-900: #0f172a;
+
+  --blue-700: #2926d0;
+  --blue-500: #1d4ed8;
+
+  --red-700: #b91c1c;
+
+  /* Spacing */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
   --space-6: 1.5rem;
 
+  /* Radius */
   --radius-md: 0.5rem;
+  --radius-full: 999px;
+
+  /* Shadow */
   --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.1);
 
+  /* Typography */
   --text-sm: 0.875rem;
   --text-md: 1rem;
   --text-xl: 1.5rem;
   --text-3xl: 2.25rem;
 }
 
-/* LAPIS 2 — semantik: peran. Isinya mengacu ke lapis 1. */
+/* =========================
+   SEMANTIC TOKENS
+   ========================= */
+
 :root {
-  --color-bg: var(--gray-50);
-  --color-fg: var(--gray-900);
+  --color-bg: #d5d0d0;
+  --color-fg: #0d0d0d;
   --color-surface: #e4ebf1;
   --color-border: #0d0d0d;
-  --color-primary: var(--blue-700);
-  --color-danger: #ff3d3d;
-  --color-focus: var(--blue-500);
+
+  --color-primary: #2926d0;
+  --color-danger: #b91c1c;
+  --color-focus: #1d4ed8;
 
   --card-pad: var(--space-4);
   --section-gap: var(--space-6);
