@@ -1,0 +1,166 @@
+/* =========================
+   HEADER
+   ========================= */
+.page {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
+}
+
+.isi {
+  display: grid;
+  grid-template-columns: 16rem 1fr;
+  grid-template-areas: "sisi utama";
+  gap: var(--space-6);
+  padding: var(--space-6) var(--space-4);
+}
+
+.sisi {
+  display: flex;
+  flex-direction: column;
+  grid-area: sisi;
+}
+
+.sisi ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.utama {
+  min-width: 0;
+  grid-area: utama;
+}
+
+.galeri {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--space-4);
+}
+
+.kartu__kaki {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.sorotan {
+  grid-column: span 2;
+}
+
+.papan {
+  grid-row: span 2;
+}
+
+.galeri .kartu {
+  display: grid;
+  align-content: start;
+  min-height: 14rem;
+}
+
+.kartu__isi {
+  min-width: 0;
+}
+
+.kartu__judul {
+  overflow-wrap: anywhere;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* =========================
+   NAVIGATION
+   ========================= */
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+nav a {
+  display: inline-block;
+  padding: var(--space-2) var(--space-3);
+
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+/* =========================
+   MAIN
+   ========================= */
+
+main {
+  padding: var(--space-6) var(--space-4);
+}
+
+/* =========================
+   SECTION
+   ========================= */
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* =========================
+   TABLE
+   ========================= */
+
+section table {
+  width: 100%;
+  border: 1px solid var(--color-border);
+}
+
+section th,
+section td {
+  padding: var(--space-2);
+  border: 1px solid var(--color-border);
+  text-align: left;
+}
+
+/* =========================
+   FIGURE
+   ========================= */
+
+figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+figcaption {
+  font-size: var(--text-sm);
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+
+footer {
+  padding: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+footer p {
+  font-size: var(--text-sm);
+}
