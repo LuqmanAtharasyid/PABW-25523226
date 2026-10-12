@@ -48,6 +48,24 @@
           <section id="game-populer">
             <h2>Game Populer</h2>
 
+            <div class="filter-proyek">
+              <button type="button" class="filter" data-kategori="semua">
+                Semua
+              </button>
+              <button type="button" class="filter" data-kategori="selesai">
+                Selesai
+              </button>
+              <button type="button" class="filter" data-kategori="proses">
+                Dalam Proses
+              </button>
+            </div>
+
+            <p id="pesan-kosong" hidden>
+              Tidak ada proyek yang sesuai dengan filter.
+            </p>
+
+            <ul id="daftar"></ul>
+
             <div class="galeri">
               <article class="kartu sorotan">
                 <h3 class="kartu__judul">Mobile Legends</h3>
@@ -107,7 +125,7 @@
           <section id="topup-diamond">
             <h2>Top Up Diamond</h2>
 
-            <form action="/simpan" method="post" class="form-kolom">
+            <form class="form-kolom">
               <div>
                 <label for="nama">Nama</label>
                 <input type="text" id="nama" name="nama" required />
