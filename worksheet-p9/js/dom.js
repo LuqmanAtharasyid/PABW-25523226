@@ -31,6 +31,12 @@ const pesanKosong = document.querySelector("#pesan-kosong");
 // C. Memfilter proyek dengan event delegation
 let kategoriAktif = "semua";
 
+function tandaiTombolAktif(tombolAktif) {
+  barisFilter.querySelectorAll("button").forEach((tombol) => {
+    tombol.classList.toggle("aktif", tombol === tombolAktif);
+  });
+}
+
 function filterProyek(kategori) {
   kategoriAktif = kategori;
 
@@ -54,9 +60,9 @@ function filterProyek(kategori) {
 
   pesanKosong.hidden = proyekTerfilter.length > 0;
 
-  barisFilter.querySelectorAll("button").forEach((tombol) => {
-    tombol.classList.toggle("aktif", tombol.dataset.kategori === kategoriAktif);
-  });
+  tandaiTombolAktif(
+    barisFilter.querySelector(`[data-kategori="${kategoriAktif}"]`),
+  );
 }
 
 barisFilter.addEventListener("click", (event) => {
@@ -105,6 +111,12 @@ function validasiForm() {
 
   return valid;
 }
+
+// D. Mengambil elemen form dan input
+const form = document.querySelector(".form-kolom");
+const inputNama = document.querySelector("#nama");
+const inputEmail = document.querySelector("#email");
+const inputJumlah = document.querySelector("#jumlah");
 
 // Menjalankan validasi ketika tombol Simpan ditekan
 form.addEventListener("submit", (event) => {
