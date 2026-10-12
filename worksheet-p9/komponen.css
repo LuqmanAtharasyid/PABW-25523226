@@ -1,0 +1,98 @@
+/* =========================
+   FORM
+   ========================= */
+
+.form-kolom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* =========================
+   LABEL
+   ========================= */
+
+.form-kolom label {
+  display: block;
+  margin-bottom: var(--space-1);
+
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+/* =========================
+   INPUT
+   ========================= */
+
+.form-kolom input,
+.form-kolom select,
+.form-kolom textarea {
+  width: 100%;
+
+  padding: var(--space-2) var(--space-3);
+
+  font: inherit;
+
+  color: var(--color-fg);
+  background-color: var(--color-surface);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+/* =========================
+   BUTTON
+   ========================= */
+
+.form-kolom button {
+  width: fit-content;
+
+  padding: var(--space-2) var(--space-4);
+
+  font: inherit;
+
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+
+  border: 0;
+  border-radius: var(--radius-md);
+
+  cursor: pointer;
+}
+
+/* =========================
+   FOCUS
+   ========================= */
+
+.form-kolom input:focus-visible,
+.form-kolom select:focus-visible,
+.form-kolom textarea:focus-visible,
+.form-kolom button:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* =========================
+   VALIDATION
+   ========================= */
+
+.pesan-galat {
+  display: none;
+
+  margin-top: var(--space-1);
+
+  font-size: var(--text-sm);
+  color: var(--color-danger);
+}
+
+/* Tampilkan pesan hanya
+   setelah user berinteraksi
+   dengan input yang tidak valid */
+.form-kolom:has(input:user-invalid) .pesan-galat {
+  display: block;
+}
+
+/* Border input yang tidak valid */
+.form-kolom input:user-invalid {
+  border-color: var(--color-danger);
+}
