@@ -1,70 +1,85 @@
-import { daftarProyek } from "./app.js";
-
-// A. Mengambil elemen dari halaman
 const wadah = document.querySelector("#daftar");
+const pesanKosong = document.querySelector("#pesan-kosong");
+const statusMuat = document.querySelector("#status-muat");
+const pesanGalat = document.querySelector("#pesan-galat");
+const barisFilter = document.querySelector(".filter-proyek");
 
-// B. Membuat satu kartu proyek
+let semuaProyek = [];
+let kategoriAktif = "semua";
+
+// Membuat satu kartu proyek
 function buatKartu(proyek) {
   const kartu = document.createElement("li");
   kartu.className = "kartu";
   kartu.textContent = proyek.judul;
-
   return kartu;
 }
 
-// C. Menampilkan semua proyek
-function renderProyek(daftar) {
+// Menampilkan proyek sesuai filter aktif
+function renderTampilan() {
   wadah.textContent = "";
 
-  daftar.forEach((proyek) => {
-    wadah.append(buatKartu(proyek));
-  });
-}
-
-// D. Menampilkan proyek pertama kali
-renderProyek(daftarProyek);
-
-// C. Mengambil tombol filter dan pesan daftar kosong
-const barisFilter = document.querySelector(".filter-proyek");
-const pesanKosong = document.querySelector("#pesan-kosong");
-
-// C. Memfilter proyek dengan event delegation
-let kategoriAktif = "semua";
-
-function tandaiTombolAktif(tombolAktif) {
-  barisFilter.querySelectorAll("button").forEach((tombol) => {
-    tombol.classList.toggle("aktif", tombol === tombolAktif);
-  });
-}
-
-function filterProyek(kategori) {
-  kategoriAktif = kategori;
-
-  const proyekTerfilter = daftarProyek.filter((proyek) => {
-    if (kategori === "semua") {
+  const proyekTerfilter = semuaProyek.filter((proyek) => {
+    if (kategoriAktif === "semua") {
       return true;
     }
 
-    if (kategori === "selesai") {
+    if (kategoriAktif === "selesai") {
       return proyek.selesai;
     }
 
-    if (kategori === "proses") {
+    if (kategoriAktif === "proses") {
       return !proyek.selesai;
     }
 
     return false;
   });
 
-  renderProyek(proyekTerfilter);
+  proyekTerfilter.forEach((proyek) => {
+    wadah.append(buatKartu(proyek));
+  });
 
-  pesanKosong.hidden = proyekTerfilter.length > 0;
-
-  tandaiTombolAktif(
-    barisFilter.querySelector(`[data-kategori="${kategoriAktif}"]`),
-  );
+  if (semuaProyek.length === 0) {
+    pesanKosong.textContent = "Belum ada data proyek.";
+    pesanKosong.hidden = false;
+  } else if (proyekTerfilter.length === 0) {
+    pesanKosong.textContent = "Tidak ada proyek yang sesuai dengan filter.";
+    pesanKosong.hidden = false;
+  } else {
+    pesanKosong.hidden = true;
+  }
 }
 
+// Dipanggil setelah data berhasil diambil dari API
+export function render(daftar) {
+  semuaProyek = daftar;
+  pesanGalat.hidden = true;
+  renderTampilan();
+}
+
+// Menampilkan pesan error
+export function tampilkanGalat(galat) {
+  pesanGalat.textContent = "Data proyek gagal dimuat: " + galat.message;
+  pesanGalat.hidden = false;
+}
+
+// Mengatur tampilan loading
+export function aturMemuat(aktif) {
+  statusMuat.hidden = !aktif;
+
+  if (aktif) {
+    pesanGalat.hidden = true;
+  }
+}
+
+// Menandai tombol filter yang aktif
+function tandaiTombolAktif(tombolAktif) {
+  barisFilter.querySelectorAll("button").forEach((tombol) => {
+    tombol.classList.toggle("aktif", tombol === tombolAktif);
+  });
+}
+
+// Event delegation untuk tombol filter
 barisFilter.addEventListener("click", (event) => {
   const tombol = event.target.closest("button");
 
@@ -72,17 +87,23 @@ barisFilter.addEventListener("click", (event) => {
     return;
   }
 
-  filterProyek(tombol.dataset.kategori);
+  kategoriAktif = tombol.dataset.kategori;
+  tandaiTombolAktif(tombol);
+  renderTampilan();
 });
 
-// Atur filter awal
-filterProyek("semua");
+// Filter awal
+tandaiTombolAktif(barisFilter.querySelector('[data-kategori="semua"]'));
 
-// D. Validasi form
+// Validasi formulir
+const form = document.querySelector(".form-kolom");
+const inputNama = document.querySelector("#nama");
+const inputEmail = document.querySelector("#email");
+const inputJumlah = document.querySelector("#jumlah");
+
 function validasiForm() {
   let valid = true;
 
-  // Validasi nama
   if (inputNama.value.trim() === "") {
     inputNama.setCustomValidity("Nama wajib diisi.");
     valid = false;
@@ -90,7 +111,6 @@ function validasiForm() {
     inputNama.setCustomValidity("");
   }
 
-  // Validasi email
   if (inputEmail.value.trim() === "") {
     inputEmail.setCustomValidity("Email wajib diisi.");
     valid = false;
@@ -101,7 +121,6 @@ function validasiForm() {
     inputEmail.setCustomValidity("");
   }
 
-  // Validasi jumlah diamond
   if (inputJumlah.value === "" || Number(inputJumlah.value) < 1) {
     inputJumlah.setCustomValidity("Jumlah Diamond minimal 1.");
     valid = false;
@@ -112,24 +131,13 @@ function validasiForm() {
   return valid;
 }
 
-// D. Mengambil elemen form dan input
-const form = document.querySelector(".form-kolom");
-const inputNama = document.querySelector("#nama");
-const inputEmail = document.querySelector("#email");
-const inputJumlah = document.querySelector("#jumlah");
-
-// Menjalankan validasi ketika tombol Simpan ditekan
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  console.log("Event submit berjalan!");
-
   if (!validasiForm()) {
-    console.log("Validasi gagal.");
     form.reportValidity();
     return;
   }
 
-  console.log("Validasi berhasil!");
   alert("Form valid! Data siap diproses.");
 });

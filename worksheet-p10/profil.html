@@ -60,6 +60,10 @@
               </button>
             </div>
 
+            <p id="status-muat" hidden>Memuat data proyek...</p>
+
+            <p id="pesan-galat" hidden></p>
+
             <p id="pesan-kosong" hidden>
               Tidak ada proyek yang sesuai dengan filter.
             </p>
@@ -122,6 +126,42 @@
             </figure>
           </section>
 
+          <section id="proyek">
+            <h2>Daftar Proyek Saya</h2>
+
+            <div id="filter-proyek" class="filter-proyek">
+              <button
+                type="button"
+                data-kategori="semua"
+                class="tombol-filter aktif"
+              >
+                Semua
+              </button>
+              <button type="button" data-kategori="web" class="tombol-filter">
+                Web
+              </button>
+              <button
+                type="button"
+                data-kategori="selesai"
+                class="tombol-filter"
+              >
+                Selesai
+              </button>
+              <button
+                type="button"
+                data-kategori="proses"
+                class="tombol-filter"
+              >
+                Dalam Proses
+              </button>
+            </div>
+
+            <p id="muat" hidden>Memuat data...</p>
+            <p id="galat" class="pesan-galat" hidden></p>
+            <p id="kosong" hidden>Belum ada data.</p>
+            <ul id="daftar" class="wadah-kartu"></ul>
+          </section>
+
           <section id="topup-diamond">
             <h2>Top Up Diamond</h2>
 
@@ -170,6 +210,5 @@
       </footer>
     </div>
     <script type="module" src="js/app.js"></script>
-    <script type="module" src="js/dom.js"></script>
   </body>
 </html>

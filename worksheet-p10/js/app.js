@@ -1,66 +1,17 @@
-const profil = {
-  nama: "Luqman Atharasyid",
-  peran: "Mahasiswa Informatika yang belajar front-end",
-  keahlian: ["HTML", "CSS", "JavaScript"],
-};
+import { ambilProyek } from "./api.js";
+import { render, tampilkanGalat, aturMemuat } from "./dom.js";
 
-const jumlahProyek = 1;
+async function muatProyek() {
+  aturMemuat(true);
 
-function buatPerkenalan({ nama, peran }) {
-  return `${nama} — ${peran}`;
+  try {
+    const data = await ambilProyek();
+    render(data);
+  } catch (galat) {
+    tampilkanGalat(galat);
+  } finally {
+    aturMemuat(false);
+  }
 }
 
-const formatKeahlian = (daftar) => daftar.join(" · ");
-
-console.log(buatPerkenalan(profil));
-console.log(formatKeahlian(profil.keahlian));
-
-console.log(profil);
-console.log(jumlahProyek);
-console.log(typeof profil.nama);
-console.log(typeof jumlahProyek);
-
-const kalimat = `Nama saya ${profil.nama}, dan saya belajar ${profil.keahlian.length} hal.`;
-
-console.log(kalimat);
-
-const daftarProyek = [
-  {
-    judul: "Website Top Up Diamond",
-    tahun: 2026,
-    selesai: true,
-  },
-  {
-    judul: "Sistem Booking Fotografer",
-    tahun: 2026,
-    selesai: true,
-  },
-  {
-    judul: "Sistem Informasi KosKita",
-    tahun: 2026,
-    selesai: false,
-  },
-];
-
-console.table(daftarProyek);
-
-const judulProyek = daftarProyek.map((proyek) => proyek.judul);
-
-console.table(judulProyek);
-
-const proyekSelesai = daftarProyek.filter((proyek) => proyek.selesai);
-
-console.table(proyekSelesai);
-
-const proyekKosKita = daftarProyek.find(
-  (proyek) => proyek.judul === "Sistem Informasi KosKita",
-);
-
-console.log(proyekKosKita);
-
-const urut = [...daftarProyek].sort((a, b) => a.judul.localeCompare(b.judul));
-
-console.table(urut);
-console.table(daftarProyek);
-
-export { daftarProyek };
+muatProyek();
