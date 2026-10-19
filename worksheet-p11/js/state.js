@@ -18,12 +18,20 @@ function bacaPenyimpanan() {
       !Array.isArray(data.favorit) ||
       !data.favorit.every((id) => Number.isInteger(id) && id > 0)
     ) {
+      localStorage.removeItem(KUNCI_PENYIMPANAN);
       return { favorit: [] };
     }
 
     return data;
   } catch (galat) {
     console.warn("Penyimpanan tidak dapat dibaca:", galat);
+
+    try {
+      localStorage.removeItem(KUNCI_PENYIMPANAN);
+    } catch (galatHapus) {
+      console.warn("Penyimpanan rusak tidak dapat dihapus:", galatHapus);
+    }
+
     return { favorit: [] };
   }
 }
