@@ -74,3 +74,9 @@ export function ubahFavorit(idProyek) {
   simpanPenyimpanan();
   fungsiRender();
 }
+
+export function resetFavorit() {
+  state.favorit = [];
+  simpanPenyimpanan();
+  fungsiRender();
+}

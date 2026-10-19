@@ -1,11 +1,12 @@
 import { saring } from "./data.js";
 import { state, pasangRender, aturKategori, ubahFavorit } from "./state.js";
 
-const wadah = document.querySelector("#daftar");
-const pesanKosong = document.querySelector("#pesan-kosong");
-const statusMuat = document.querySelector("#status-muat");
-const pesanGalat = document.querySelector("#pesan-galat");
-const barisFilter = document.querySelector(".filter-proyek");
+const bagianProyek = document.querySelector("#proyek");
+const wadah = bagianProyek.querySelector("#daftar");
+const pesanKosong = bagianProyek.querySelector("#kosong");
+const statusMuat = bagianProyek.querySelector("#muat");
+const pesanGalat = bagianProyek.querySelector("#galat");
+const barisFilter = bagianProyek.querySelector(".filter-proyek");
 
 function buatKartu(proyek) {
   const kartu = document.createElement("li");

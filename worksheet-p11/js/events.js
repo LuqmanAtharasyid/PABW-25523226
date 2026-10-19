@@ -1,9 +1,11 @@
-import { aturKategori } from "./state.js";
+import { aturKategori, resetFavorit } from "./state.js";
 import { pasangValidasiForm } from "./dom.js";
 
-const barisFilter = document.querySelector(".filter-proyek");
+const bagianProyek = document.querySelector("#proyek");
+const barisFilter = bagianProyek.querySelector(".filter-proyek");
+const tombolReset = bagianProyek.querySelector("#reset-favorit");
 
-// Mengatur event tombol filter
+// Mengatur event tombol filter proyek
 export function pasangEventFilter() {
   barisFilter.addEventListener("click", (event) => {
     const tombol = event.target.closest("button");
@@ -22,7 +24,14 @@ export function pasangEventFilter() {
   });
 }
 
-// Mengatur event formulir
+// Mengatur event reset favorit
+export function pasangEventReset() {
+  tombolReset.addEventListener("click", () => {
+    resetFavorit();
+  });
+}
+
+// Mengatur event formulir top up
 export function pasangEventForm() {
   pasangValidasiForm();
 }
