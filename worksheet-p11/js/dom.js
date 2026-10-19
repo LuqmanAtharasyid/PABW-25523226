@@ -1,46 +1,42 @@
+import { saring } from "./data.js";
+import { state, pasangRender, aturKategori, ubahFavorit } from "./state.js";
+
 const wadah = document.querySelector("#daftar");
 const pesanKosong = document.querySelector("#pesan-kosong");
 const statusMuat = document.querySelector("#status-muat");
 const pesanGalat = document.querySelector("#pesan-galat");
 const barisFilter = document.querySelector(".filter-proyek");
-import { profil, buatPerkenalan, formatKeahlian, saring } from "./data.js";
 
-let semuaProyek = [];
-let kategoriAktif = "semua";
-
-// Membuat satu kartu proyek
 function buatKartu(proyek) {
   const kartu = document.createElement("li");
   kartu.className = "kartu";
-  kartu.textContent = proyek.judul;
+
+  const judul = document.createElement("span");
+  judul.textContent = proyek.judul;
+
+  const tombolFavorit = document.createElement("button");
+  tombolFavorit.type = "button";
+  tombolFavorit.textContent = state.favorit.includes(proyek.id)
+    ? "★ Hapus favorit"
+    : "☆ Favorit";
+  tombolFavorit.addEventListener("click", () => {
+    ubahFavorit(proyek.id);
+  });
+
+  kartu.append(judul, tombolFavorit);
   return kartu;
 }
 
-// Menampilkan proyek sesuai filter aktif
-function renderTampilan() {
+export function render() {
   wadah.textContent = "";
 
-  const proyekTerfilter = semuaProyek.filter((proyek) => {
-    if (kategoriAktif === "semua") {
-      return true;
-    }
-
-    if (kategoriAktif === "selesai") {
-      return proyek.selesai;
-    }
-
-    if (kategoriAktif === "proses") {
-      return !proyek.selesai;
-    }
-
-    return false;
-  });
+  const proyekTerfilter = saring(state.semuaProyek, state.kategoriAktif);
 
   proyekTerfilter.forEach((proyek) => {
     wadah.append(buatKartu(proyek));
   });
 
-  if (semuaProyek.length === 0) {
+  if (state.semuaProyek.length === 0) {
     pesanKosong.textContent = "Belum ada data proyek.";
     pesanKosong.hidden = false;
   } else if (proyekTerfilter.length === 0) {
@@ -49,22 +45,22 @@ function renderTampilan() {
   } else {
     pesanKosong.hidden = true;
   }
+
+  barisFilter.querySelectorAll("button").forEach((tombol) => {
+    tombol.classList.toggle(
+      "aktif",
+      tombol.dataset.kategori === state.kategoriAktif,
+    );
+  });
 }
 
-// Dipanggil setelah data berhasil diambil dari API
-export function render(daftar) {
-  semuaProyek = daftar;
-  pesanGalat.hidden = true;
-  renderTampilan();
-}
+pasangRender(render);
 
-// Menampilkan pesan error
 export function tampilkanGalat(galat) {
   pesanGalat.textContent = "Data proyek gagal dimuat: " + galat.message;
   pesanGalat.hidden = false;
 }
 
-// Mengatur tampilan loading
 export function aturMemuat(aktif) {
   statusMuat.hidden = !aktif;
 
@@ -73,30 +69,14 @@ export function aturMemuat(aktif) {
   }
 }
 
-// Menandai tombol filter yang aktif
-function tandaiTombolAktif(tombolAktif) {
-  barisFilter.querySelectorAll("button").forEach((tombol) => {
-    tombol.classList.toggle("aktif", tombol === tombolAktif);
-  });
+export function tampilkanKategoriAktif(kategori) {
+  aturKategori(kategori);
 }
 
-// Event delegation untuk tombol filter
-barisFilter.addEventListener("click", (event) => {
-  const tombol = event.target.closest("button");
+export function pasangPesanAwal() {
+  render();
+}
 
-  if (!tombol || !barisFilter.contains(tombol)) {
-    return;
-  }
-
-  kategoriAktif = tombol.dataset.kategori;
-  tandaiTombolAktif(tombol);
-  renderTampilan();
-});
-
-// Filter awal
-tandaiTombolAktif(barisFilter.querySelector('[data-kategori="semua"]'));
-
-// Validasi formulir
 const form = document.querySelector(".form-kolom");
 const inputNama = document.querySelector("#nama");
 const inputEmail = document.querySelector("#email");
@@ -132,13 +112,15 @@ function validasiForm() {
   return valid;
 }
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
+export function pasangValidasiForm() {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-  if (!validasiForm()) {
-    form.reportValidity();
-    return;
-  }
+    if (!validasiForm()) {
+      form.reportValidity();
+      return;
+    }
 
-  alert("Form valid! Data siap diproses.");
-});
+    alert("Form valid! Data siap diproses.");
+  });
+}
