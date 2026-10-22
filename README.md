@@ -261,3 +261,106 @@ Saya juga menjalankan dan mencoba kode di browser, memeriksa hasilnya melalui Co
 ## Penutup
 
 Proyek ini saya gunakan untuk belajar membuat halaman web secara bertahap, mulai dari HTML dan CSS sampai menggunakan JavaScript untuk menampilkan data dan membuat halaman lebih interaktif.
+
+## Pertemuan 11 — Modul, State, dan Penyimpanan Klien
+
+Pada pertemuan ini saya belajar memisahkan kode JavaScript menjadi beberapa modul, mengelola state aplikasi, dan menyimpan data di browser menggunakan `localStorage`.
+
+### Pembagian Modul JavaScript
+
+Saya membagi kode JavaScript berdasarkan tanggung jawab masing-masing file:
+
+- `api.js` untuk mengambil data proyek dari API.
+- `data.js` untuk menyimpan data profil dan fungsi pengolahan data proyek.
+- `state.js` untuk mengelola state proyek, kategori aktif, dan favorit.
+- `dom.js` untuk menampilkan data dan mengatur tampilan halaman.
+- `events.js` untuk mengatur event tombol filter, reset favorit, dan formulir.
+- `app.js` untuk menghubungkan modul dan menjalankan aplikasi.
+
+### Pengelolaan State
+
+Saya menggunakan state untuk menyimpan daftar proyek, kategori filter yang aktif, dan daftar proyek favorit. Ketika state berubah, tampilan halaman diperbarui agar sesuai dengan data terbaru.
+
+### Penyimpanan dengan localStorage
+
+Saya menggunakan `localStorage` untuk menyimpan daftar ID proyek favorit agar tetap tersedia setelah halaman dimuat ulang. Data disimpan menggunakan `JSON.stringify()` dan dibaca kembali menggunakan `JSON.parse()`.
+
+Saya juga menambahkan penanganan kesalahan menggunakan `try...catch`. Jika data penyimpanan rusak atau formatnya tidak sesuai, aplikasi menggunakan daftar favorit kosong agar tetap dapat berjalan.
+
+### Pengujian
+
+Saya mencoba beberapa fitur melalui browser dan Developer Tools:
+
+- Menampilkan daftar proyek dari API.
+- Memfilter proyek berdasarkan status.
+- Menambahkan dan menghapus favorit.
+- Memastikan favorit tetap tersimpan setelah halaman dimuat ulang.
+- Menguji penanganan data `localStorage` yang rusak.
+- Menggunakan tombol reset untuk mengosongkan semua favorit.
+
+### Catatan Penggunaan AI
+
+Saya menggunakan AI untuk membantu memahami pembagian modul, memperbaiki kode JavaScript, dan mencari penyebab masalah. Saya juga menjalankan dan menguji kode di browser, memeriksa Console, serta mencoba fitur penyimpanan favorit.
+
+### Teknologi yang Digunakan
+
+- HTML
+- CSS
+- JavaScript ES Modules
+- Fetch API
+- JSON
+- localStorage
+- Visual Studio Code
+- Browser Developer Tools
+- Git dan GitHub
+
+## Pertemuan 12 — Build Tooling, npm, dan Framework SPA
+
+Pada pertemuan ini saya memindahkan halaman profil dan daftar proyek ke Vue 3 menggunakan Vite. Saya belajar membagi halaman menjadi komponen, menggunakan state reaktif, dan membuat build produksi.
+
+### Vue 3 dan Komponen
+
+Saya menggunakan beberapa komponen Vue untuk membagi halaman berdasarkan fungsinya:
+
+- `KepalaProfil.vue` untuk menampilkan informasi profil.
+- `DaftarProyek.vue` untuk menampilkan daftar proyek dan filter kategori.
+- `FormTopup.vue` untuk formulir top up diamond.
+- `TentangSaya.vue` untuk bagian tentang saya.
+
+Data profil diteruskan ke komponen melalui props, sedangkan daftar proyek dan kategori dikelola menggunakan state bersama.
+
+### State Reaktif dan Penyimpanan
+
+Saya menggunakan `reactive()` dari Vue untuk mengelola state aplikasi. Saya juga menggunakan `computed()` untuk menyaring daftar proyek berdasarkan kategori aktif.
+
+Saya menggunakan `onMounted()` untuk memulihkan pilihan terakhir dan mengambil data proyek melalui Fetch API. Fungsi `watch()` digunakan untuk menyimpan perubahan state ke `localStorage` dalam format JSON.
+
+Saya juga menguji penanganan data penyimpanan yang rusak agar aplikasi dapat kembali menggunakan nilai bawaan.
+
+### Build Produksi
+
+Saya menggunakan Vite untuk membangun dan menjalankan hasil produksi:
+
+- `npm run dev` untuk menjalankan server pengembangan.
+- `npm run build` untuk menghasilkan folder `dist/`.
+- `npm run preview` untuk mencoba hasil build produksi.
+
+Build berhasil dijalankan dan halaman dapat dibuka melalui server preview. Saya memeriksa permintaan berkas melalui tab Network pada Developer Tools untuk membandingkan versi pengembangan dengan hasil build.
+
+### Teknologi yang Digunakan
+
+- Vue 3
+- Vite
+- JavaScript
+- HTML dan CSS
+- Fetch API
+- JSON
+- `localStorage`
+- npm
+- Git dan GitHub
+
+### Catatan Penggunaan AI
+
+Saya menggunakan AI untuk membantu memahami instruksi worksheet, mempelajari konsep Vue, menyusun dan meninjau kode komponen, mengelola state reaktif, serta mencari penyebab masalah saat pengujian.
+
+Saya menjalankan proyek sendiri, memeriksa hasil melalui browser dan Developer Tools, menguji penyimpanan, menjalankan build, dan memeriksa hasil preview. Saya juga mempelajari kembali kode yang digunakan agar dapat menjelaskan fungsinya.
