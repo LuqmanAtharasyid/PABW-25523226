@@ -1,6 +1,4 @@
-
-const ALAMAT =
-  "https://raw.githubusercontent.com/LuqmanAtharasyid/PABW-25523226/refs/heads/main/worksheet-p10/data/proyek.json";
+const ALAMAT = "/proyek.json";
 
 export async function ambilProyek() {
   const respons = await fetch(ALAMAT);
