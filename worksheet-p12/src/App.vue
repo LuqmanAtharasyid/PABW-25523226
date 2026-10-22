@@ -1,39 +1,51 @@
+
 <script setup>
-import { computed, ref } from "vue";
+import { computed, onMounted, watch } from "vue";
 import { profil, saring } from "./data.js";
+import {
+  state,
+  simpan,
+  muat,
+  pulihkan,
+  pilihKategori,
+  isiProyek,
+} from "./state.js";
+import { ambilProyek } from "./api.js";
 
 import KepalaProfil from "./components/KepalaProfil.vue";
 import DaftarProyek from "./components/DaftarProyek.vue";
 import FormTopup from "./components/FormTopup.vue";
 import TentangSaya from "./components/TentangSaya.vue";
 
-import proyekLokal from "./data/proyek.json";
-
-const semuaProyek = ref([]);
-const kategoriAktif = ref("semua");
-const status = ref("memuat");
-
 const proyekTampil = computed(() =>
-  saring(semuaProyek.value, kategoriAktif.value),
+  saring(state.daftarProyek, state.kategoriAktif),
 );
 
-async function muat() {
-  status.value = "memuat";
+function ubahFilter(kategori) {
+  pilihKategori(kategori);
+}
+
+onMounted(async () => {
+  pulihkan(muat());
 
   try {
-    semuaProyek.value = proyekLokal;
-    status.value = "berhasil";
+    isiProyek(await ambilProyek());
   } catch (galat) {
     console.error("Gagal memuat proyek:", galat);
-    status.value = "error";
+    state.galat =
+      "Data gagal dimuat. Periksa koneksi, lalu muat ulang.";
+  } finally {
+    state.memuat = false;
   }
-}
+});
 
-function ubahFilter(kategori) {
-  kategoriAktif.value = kategori;
-}
-
-muat();
+watch(
+  state,
+  (nilai) => {
+    simpan(nilai);
+  },
+  { deep: true },
+);
 </script>
 
 <template>
@@ -46,8 +58,8 @@ muat();
 
     <DaftarProyek
       :proyek="proyekTampil"
-      :kategori-aktif="kategoriAktif"
-      :status="status"
+      :kategori-aktif="state.kategoriAktif"
+      :status="state.memuat ? 'memuat' : state.galat ? 'error' : 'berhasil'"
       @ubah-filter="ubahFilter"
     />
 
